@@ -1,0 +1,158 @@
+ <!doctype html>
+
+<html>
+    <head>
+    <style>
+    div {
+        background-color: #ffcf87;
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+
+    body {
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+    </style>
+
+    </head>
+
+    <body>
+    <div>
+        <br>
+        <h1>Distance and Temperature Conversion</h1>
+        <br>
+    </div>
+        <h2>Temperature</h2>
+        <br>
+        <h4>Celsuis to Fahrenheit</h4>
+        <label style="color:#808080;" for="celtofahren">Enter temperature here.</label>
+        <br>
+        <input id="celtofahren" type="number">
+        <button id="ctofConvert">Convert</button>
+        <button id="ctofClear">Clear</button>
+        <br>
+        <br>
+        <input id="ctofresult" type="number" readonly>
+        <br>
+
+        <h4>Fahrenheit to Celsius</h4>
+        <label style="color:#808080;" for="fahrentocel">Enter temperature here.</label>
+        <br>
+        <input id="fahrentocel" type="number">
+        <button id="ftocConvert">Convert</button>
+        <button id="ftocClear">Clear</button>
+        
+        <br>
+        <br>
+        <input id="ftocresult" type="number" readonly>
+        <br>
+        <br>
+
+        <h2>Distance</h2>
+        <br>
+        <h4>Meters to Feet</h4>
+        <label style="color:#808080;" for="mtoft">Enter distance here.</label>
+        <br>
+        <input id="mtoft" type="number">
+        <button id="mtoftConvert">Convert</button>
+        <button id="mtoftClear">Clear</button>
+        <br>
+        <br>
+        <input id="mtoftresult" type="number" readonly>
+        <br>
+        <br>
+
+        <h4>Feet to Meters</h4>
+        <label style="color:#808080;" for="fttom">Enter distance here.</label>
+        <br>
+        <input id="fttom" type="number">
+        <button id="fttomConvert">Convert</button>
+        <button id="fttomClear">Clear</button>
+        <br>
+        <br>
+        <input id="fttomresult" type="number" readonly>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="index.html">Return to Home Page</a>
+
+        <script>
+        //Celsius to Fahrenheit
+            document.getElementById("ctofConvert").addEventListener("click",()=>
+            {
+                var u, c, r;
+                u = document.getElementById("celtofahren").value * 1;
+                c = Math.round(u);
+                r = (c * (9/5)) + 32;
+                s = s = Math.round(r);
+
+                document.getElementById("ctofresult").value = s;
+            });
+
+        //This is how I interpreted "at 0 decimal places. Forgive me."
+
+            document.getElementById("ctofClear").addEventListener("click",()=> 
+            {
+                document.getElementById("celtofahren").value = '';
+                document.getElementById("ctofresult").value = '';
+            });
+
+        //Fahrenheit to Celsius
+            document.getElementById("ftocConvert").addEventListener("click",()=>
+            {
+                var u, f, r;
+                u = document.getElementById("fahrentocel").value * 1;
+                f = Math.round(u);
+                r = (f - 32)*(5/9);
+                s = Math.round(r);
+
+                document.getElementById("ftocresult").value = s;
+            });
+
+            document.getElementById("ftocClear").addEventListener("click",()=> 
+            {
+                document.getElementById("fahrentocel").value = '';
+                document.getElementById("ftocresult").value = '';
+            });
+
+        //Meters to Feet
+            document.getElementById("mtoftConvert").addEventListener("click",()=>
+            {
+                var u, ft, r, s;
+                u = document.getElementById("mtoft").value * 1;
+                ft = Math.round(u);
+                r = ft * 3.281;
+                s = Math.round(r);
+
+                document.getElementById("mtoftresult").value = s;
+            });
+
+            document.getElementById("mtoftClear").addEventListener("click",()=> 
+            {
+                document.getElementById("mtoft").value = '';
+                document.getElementById("mtoftresult").value = '';
+            });
+
+        //Feet to Meters
+            document.getElementById("fttomConvert").addEventListener("click",()=>
+            {
+                var u, m, r, s;
+                u = document.getElementById("fttom").value * 1;
+                m = Math.round(u);
+                r = m / 3.281;
+                s = Math.round(r);
+
+                document.getElementById("fttomresult").value = s;
+            });
+
+            document.getElementById("fttomClear").addEventListener("click",()=> 
+            {
+                document.getElementById("fttom").value = '';
+                document.getElementById("fttomresult").value = '';
+            });
+        </script>    
+        
+    </body>
+</html>
