@@ -1,0 +1,200 @@
+  <!doctype html>
+
+<html>
+    <head>
+    <style>
+    div {
+        background-color: #ffcf87;
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+
+    #table-container {
+        text-align: center;
+    }
+
+    table {
+        border: 1px solid black;
+        margin: 0 auto;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    body {
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+
+
+    </style>
+        
+        <title>Simple Payroll</title>
+
+    </head>
+
+    <body>
+    <div>
+        <br>
+        <h1>Simple Payroll</h1>
+        <br>
+    </div>
+        <br>
+        <label style="color:#808080;" for="eName">Name:</label>
+        <br>
+        <input id="eName" type="text">
+        <br>
+        <br>
+        <label style="color:#808080;" for="daysWorked">Days Worked:</label>
+        <br>
+        <input id="daysWorked" type="number">
+        <br>
+        <br>
+        <label style="color:#808080;" for="dailyRate">Daily Rate:</label>
+        <br>
+        <input id="dailyRate" type="number">
+        <br>
+        <br>
+        <label style="color:#808080;" for="deduc">Deduction Amount:</label>
+        <br>
+        <input id="deduc" type="number">
+        <br>
+        <br>
+        <button id="enter">Enter</button>
+        <button id="delete">Delete Entry</button>
+        <button id="deleteAll">Delete All</button>
+        <br>
+        <br>
+        <a href="index.html">Return to Home Page</a>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div id="table-container">
+        <table border = 1>
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Employee Name</td>
+                    <td>Days Worked</td>
+                    <td>Daily Rate</td>
+                    <td>Gross Pay</td>
+                    <td>Deduction Amount</td>
+                    <td>Net Pay</td>
+            <tbody>
+                </tbody>       
+        </table>
+    </div>
+
+        <dialog id="popupDelete">
+            <form method = "dialog"> 
+                <p id="deleteMessage"></p>
+                <button id="confirmDelete">Yes</button>
+                <button id="cancelDelete">No</button>
+            </form>
+        </dialog>
+    </body>
+
+    <script>
+        document.getElementById("enter").addEventListener("click", ()=>
+        {
+            var table, row, counter, name, days, rate, deduc, deducUnrounded, rowNumber;
+
+            table = table = document.getElementById("table-container").getElementsByTagName('table')[0];
+            counter = 1;
+            rowNumber = table.rows.length;
+
+            name = document.getElementById("eName").value;
+            days = document.getElementById("daysWorked").value * 1;
+            rate = document.getElementById("dailyRate").value * 1;
+            deducUnrounded = document.getElementById("deduc").value * 1;
+
+    //Side note: I'm not very knowledgable in economics.
+    
+            deduc = deducUnrounded.toFixed(2);
+
+            let grossUnrounded = days * rate;
+            let gross = grossUnrounded.toFixed(2);
+            let netUnrounded = gross - deduc;
+            let net = netUnrounded.toFixed(2);
+
+            //Adding rows
+            row = table.insertRow(-1);
+
+            //Adding cells
+            let ci = row.insertCell(0);
+            let cii = row.insertCell(1);
+            let ciii = row.insertCell(2);
+            let civ = row.insertCell(3);
+            let cv = row.insertCell(4);
+            let cvi = row.insertCell(5);
+            let cvii = row.insertCell(6);
+
+            ci.innerText = rowNumber;
+            cii.innerText = name;
+            ciii.innerText = days;
+            civ.innerText = rate;
+            cv.innerText = gross;
+            cvi.innerText = deduc;
+            cvii.innerText = net;
+        });
+
+        document.getElementById("delete").addEventListener("click", ()=>
+        {   var enterRow, table;
+            table = document.querySelector("#table-container table");
+            enterRow = prompt("Which row would you like to delete?");
+
+            document.getElementById("deleteMessage").innerHTML = "Are you sure you would like to delete this entry?"
+            document.getElementById("popupDelete").showModal();
+
+            document.getElementById("confirmDelete").onclick = function ()
+            {
+
+                table.deleteRow(enterRow);
+
+                updateNumbers(table);
+                document.getElementById("popupDelete").close();
+                
+            };
+
+        });
+
+        document.getElementById("deleteAll").addEventListener("click", ()=>
+        {   
+            document.getElementById("deleteMessage").innerHTML = "Are you sure you would like to delete all entries?"
+            document.getElementById("popupDelete").showModal();
+
+            document.getElementById("confirmDelete").onclick = function ()
+            {
+                var table, rows, i; 
+                table = document.querySelector("#table-container table");
+                rows = table.rows.length;
+                i = rows - 1;
+
+                while (i > 0) {
+                table.deleteRow(i);
+                i--;
+            }
+
+            updateNumbers(table);
+            document.getElementById("popupDelete").close();           
+            };
+
+            
+
+            
+        });
+
+        function updateNumbers (table) {
+            for(let i = 1; i < table.rows.length; i++) {
+                //table.rows[0].cells[0].innerText = "No."
+                table.rows[i].cells[0].innerText = i;
+            }
+        }
+    </script>
+</body>
+</html>
