@@ -1,0 +1,99 @@
+  <!doctype html>
+
+<html>
+    <head>
+    <style>
+    div {
+        background-color: #ffcf87;
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+
+    body {
+        font-family: Verdana, sans-serif;
+        text-align: center;
+    }
+    
+    </style>
+
+    </head>
+    
+    <body>
+    <div>
+        <br>
+        <h1>Income Tax Calculator</h1>
+        <br>
+    </div>
+        <br>
+        <br>
+        <label style="color:#808080;" for="income">Enter your income.</label>
+        <br>
+        <input id="income" type="number">
+        <br>
+        <br>
+        <button id="iCalculate">Calculate</button>
+        <button id="incomeClear">Clear</button>
+        <br>
+        <br>
+        <label style="color:#808080;" for="incomeResult">Your income tax is:</label>
+        <br>
+        <input id="incomeResult" type="number">
+        <br>
+        <br>
+        <a href="index.html">Return to Home Page</a>
+        
+    </body>
+    <script>
+        document.getElementById("iCalculate").addEventListener("click",()=>
+        {
+        var i, r, d, s;
+        i = document.getElementById("income").value * 1;
+
+        if (i < 250000)
+            document.getElementById("incomeResult").value = "0.00";
+            //console.log("Passed");
+        else if (i > 250000 && i < 400000) {
+            d = i - 250000;
+            r = (20/100) * d;
+            s = r.toFixed(2);
+            document.getElementById("incomeResult").value = s;
+            //console.log("Passed");
+        }
+        else if (i > 400000 && i < 800000) {
+            d = i - 400000;
+            r = (25/100) * d + 30000;
+            s = r.toFixed(2);
+            document.getElementById("incomeResult").value = s;
+            //console.log("Passed");
+        }
+        else if (i > 800000 && i < 2000000) {
+            d = i - 800000;
+            r = (30/100) * d + 130000;
+            s = r.toFixed(2);
+            document.getElementById("incomeResult").value = s;
+            //console.log("Passed"); 
+            }
+        else if (i > 2000000 && i < 8000000) {
+            d = i - 2000000;
+            r = (32/100) * d + 490000
+            s = r.toFixed(2);
+            document.getElementById("incomeResult").value = s;
+            //console.log("Passed");
+            }
+        else {
+            d = i - 8000000;
+            r = (35/100) * d + 2410000;
+            s = r.toFixed(2);
+            document.getElementById("incomeResult").value = s;
+            //console.log("Passed");
+        }
+        //console.log("Passed");
+        });
+        
+        document.getElementById("incomeClear").addEventListener("click",()=>
+        {
+            document.getElementById("income").value = '';
+            document.getElementById("incomeResult").value = '';
+        });
+    </script> 
+</html>
